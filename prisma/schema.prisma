@@ -11,7 +11,6 @@ model Payment {
   id                 String        @id @default(uuid())
   amount             Int
   studentId          String
-  studentId          String
   status             PaymentStatus @default(PENDING)
   transactionId      String
   paymentGatewayData Json?

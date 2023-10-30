@@ -7,12 +7,22 @@ import pick from '../../../shared/pick';
 
 const initPayment = async (req: Request, res: Response, next: NextFunction) => {
   const result = await PaymentService.initPayment(req.body);
-  sendResponse(res, {
-    success: true,
-    statusCode: httpStatus.OK,
-    message: 'Payment init successful!',
-    data: result
-  });
+
+  if (!result.success) {
+    sendResponse(res, {
+      success: false,
+      statusCode: httpStatus.BAD_REQUEST,
+      message: 'Payment init failed!',
+      data: result
+    });
+  } else {
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: 'Payment init successful!',
+      data: result
+    });
+  }
 };
 
 const webhook = async (req: Request, res: Response, next: NextFunction) => {
