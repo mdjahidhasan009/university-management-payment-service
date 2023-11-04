@@ -11,9 +11,9 @@ const initPayment = async (payload: any) => {
       total_amount: payload.total_amount,
       currency: 'BDT',
       tran_id: payload.tran_id, // use unique tran_id for each api call
-      success_url: 'http://localhost:3030/success',
-      fail_url: 'http://localhost:3030/fail',
-      cancel_url: 'http://localhost:3030/cancel',
+      success_url: 'http://localhost:3030/payments?status=success',
+      fail_url: 'http://localhost:3030/payments?status=error',
+      cancel_url: 'http://localhost:3030/payments?status=warning',
       ipn_url: 'http://localhost:3030/ipn',
       shipping_method: 'N/A',
       product_name: 'Semester Payment',
