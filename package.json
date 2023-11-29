@@ -19,7 +19,8 @@
     "husky-install": "husky install",
     "husky-prepare-pre-commit": "husky add .husky/pre-commit 'yarn lint-staged'",
     "prisma:migrate": "npx prisma migrate dev",
-    "prisma:generate": "npx prisma generate"
+    "prisma:generate": "npx prisma generate",
+    "postinstall": "prisma generate"
   },
   "pre-commit": [
     "ts.check",
