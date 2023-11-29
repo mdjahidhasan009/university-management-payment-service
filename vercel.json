@@ -4,7 +4,17 @@
     {
       "src": "dist/server.js",
       "use": "@vercel/node",
-      "config": { "includeFiles": ["dist/**"] }
+      "config": {
+        "includeFiles": ["dist/**"],
+        "build": {
+          "commands": [
+            "npm install -g prisma",
+            "prisma generate",
+            "npm run build"
+          ],
+          "output": "dist"
+        }
+      }
     }
   ],
   "routes": [

@@ -18,7 +18,7 @@
     "lint-prettier": "yarn lint:check && yarn prettier:check",
     "husky-install": "husky install",
     "husky-prepare-pre-commit": "husky add .husky/pre-commit 'yarn lint-staged'",
-    "prisma:migrate": "npx prisma migrate dev ",
+    "prisma:migrate": "npx prisma migrate dev",
     "prisma:generate": "npx prisma generate"
   },
   "pre-commit": [
