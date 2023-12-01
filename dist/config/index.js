@@ -19,7 +19,8 @@ const envVarsZodSchema = zod_1.z.object({
     STORE_ID: zod_1.z.string(),
     STORE_PASS: zod_1.z.string(),
     SSL_BASE_PAYMENT_URL: zod_1.z.string(),
-    SSL_BASE_VALIDATION_URL: zod_1.z.string()
+    SSL_BASE_VALIDATION_URL: zod_1.z.string(),
+    CORS: zod_1.z.string().transform((cors) => cors.split(',')),
 });
 const envVars = envVarsZodSchema.parse(process.env);
 exports.default = {
@@ -39,5 +40,6 @@ exports.default = {
         storePass: envVars.STORE_PASS,
         sslPaymentUrl: envVars.SSL_BASE_PAYMENT_URL,
         sslValidationUrl: envVars.SSL_BASE_VALIDATION_URL
-    }
+    },
+    cors: envVars.CORS
 };
