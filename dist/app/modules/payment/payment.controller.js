@@ -45,7 +45,7 @@ const webhook = (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
         message: 'Payment verified!',
         data: result
     });
-    res.send(result);
+    // res.send(result);
 });
 const getAllFromDB = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {

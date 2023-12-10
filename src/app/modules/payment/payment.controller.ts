@@ -34,7 +34,7 @@ const webhook = async (req: Request, res: Response, next: NextFunction) => {
     data: result
   });
 
-  res.send(result);
+  // res.send(result);
 };
 
 const getAllFromDB = async (req: Request, res: Response, next: NextFunction) => {

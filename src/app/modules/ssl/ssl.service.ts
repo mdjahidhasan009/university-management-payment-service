@@ -11,10 +11,10 @@ const initPayment = async (payload: any) => {
       total_amount: payload.total_amount,
       currency: 'BDT',
       tran_id: payload.tran_id, // use unique tran_id for each api call
-      success_url: 'http://localhost:3030/payments?status=success',
-      fail_url: 'http://localhost:3030/payments?status=error',
-      cancel_url: 'http://localhost:3030/payments?status=warning',
-      ipn_url: 'http://localhost:3030/ipn',
+      success_url: `${config.apiGatewayUrl}/payments?status=success`,
+      fail_url: `${config.apiGatewayUrl}/payments?status=error`,
+      cancel_url: `${config.apiGatewayUrl}/payments?status=warning`,
+      ipn_url: `${config.apiGatewayUrl}/ipn`,
       shipping_method: 'N/A',
       product_name: 'Semester Payment',
       product_category: 'Payment',
@@ -39,7 +39,7 @@ const initPayment = async (payload: any) => {
     };
 
     const response = await axios({
-      method: 'POST',
+      method: 'post',
       url: config.ssl.sslPaymentUrl,
       data: data,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }

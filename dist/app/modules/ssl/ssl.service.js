@@ -25,10 +25,10 @@ const initPayment = (payload) => __awaiter(void 0, void 0, void 0, function* () 
             total_amount: payload.total_amount,
             currency: 'BDT',
             tran_id: payload.tran_id,
-            success_url: 'http://localhost:3030/payments?status=success',
-            fail_url: 'http://localhost:3030/payments?status=error',
-            cancel_url: 'http://localhost:3030/payments?status=warning',
-            ipn_url: 'http://localhost:3030/ipn',
+            success_url: `${config_1.default.apiGatewayUrl}/payments?status=success`,
+            fail_url: `${config_1.default.apiGatewayUrl}/payments?status=error`,
+            cancel_url: `${config_1.default.apiGatewayUrl}/payments?status=warning`,
+            ipn_url: `${config_1.default.apiGatewayUrl}/ipn`,
             shipping_method: 'N/A',
             product_name: 'Semester Payment',
             product_category: 'Payment',
@@ -52,7 +52,7 @@ const initPayment = (payload) => __awaiter(void 0, void 0, void 0, function* () 
             ship_country: 'Bangladesh'
         };
         const response = yield (0, axios_1.default)({
-            method: 'POST',
+            method: 'post',
             url: config_1.default.ssl.sslPaymentUrl,
             data: data,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' }

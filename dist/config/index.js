@@ -21,6 +21,7 @@ const envVarsZodSchema = zod_1.z.object({
     SSL_BASE_PAYMENT_URL: zod_1.z.string(),
     SSL_BASE_VALIDATION_URL: zod_1.z.string(),
     CORS: zod_1.z.string().transform((cors) => cors.split(',')),
+    API_GATEWAY_URL: zod_1.z.string()
 });
 const envVars = envVarsZodSchema.parse(process.env);
 exports.default = {
@@ -41,5 +42,6 @@ exports.default = {
         sslPaymentUrl: envVars.SSL_BASE_PAYMENT_URL,
         sslValidationUrl: envVars.SSL_BASE_VALIDATION_URL
     },
-    cors: envVars.CORS
+    cors: envVars.CORS,
+    apiGatewayUrl: envVars.API_GATEWAY_URL
 };
