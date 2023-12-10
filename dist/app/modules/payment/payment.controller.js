@@ -20,7 +20,7 @@ const payment_constants_1 = require("./payment.constants");
 const pick_1 = __importDefault(require("../../../shared/pick"));
 const initPayment = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield payment_service_1.PaymentService.initPayment(req.body);
-    if (!result.success) {
+    if (!result) {
         (0, response_1.default)(res, {
             success: false,
             statusCode: http_status_1.default.BAD_REQUEST,

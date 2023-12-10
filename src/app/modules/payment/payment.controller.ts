@@ -8,7 +8,7 @@ import pick from '../../../shared/pick';
 const initPayment = async (req: Request, res: Response, next: NextFunction) => {
   const result = await PaymentService.initPayment(req.body);
 
-  if (!result.success) {
+  if (!result) {
     sendResponse(res, {
       success: false,
       statusCode: httpStatus.BAD_REQUEST,

@@ -38,6 +38,7 @@ const initPayment = async (data: any) => {
     return paymentSession.redirectGatewayURL;
   } catch (e) {
     console.log(e);
+    return null;
   }
 };
 

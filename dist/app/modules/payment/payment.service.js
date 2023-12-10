@@ -60,6 +60,7 @@ const initPayment = (data) => __awaiter(void 0, void 0, void 0, function* () {
     }
     catch (e) {
         console.log(e);
+        return null;
     }
 });
 const webhook = (payload) => __awaiter(void 0, void 0, void 0, function* () {
