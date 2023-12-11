@@ -45,13 +45,13 @@ const initPayment = async (data: any) => {
 const webhook = async (payload: any) => {
   if (!payload || !payload?.status || payload?.status !== 'VALID') {
     return {
-      message: 'Invalid payment'
+      message: 'Invalid payment!'
     };
   }
   const result = await sslService.validate(payload);
   if (result?.status !== 'VALID') {
     return {
-      message: 'Invalid payment'
+      message: 'Invalid payment.'
     };
   }
   const { tran_id } = result;

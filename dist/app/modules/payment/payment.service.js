@@ -66,13 +66,13 @@ const initPayment = (data) => __awaiter(void 0, void 0, void 0, function* () {
 const webhook = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     if (!payload || !(payload === null || payload === void 0 ? void 0 : payload.status) || (payload === null || payload === void 0 ? void 0 : payload.status) !== 'VALID') {
         return {
-            message: 'Invalid payment'
+            message: 'Invalid payment!'
         };
     }
     const result = yield ssl_service_1.sslService.validate(payload);
     if ((result === null || result === void 0 ? void 0 : result.status) !== 'VALID') {
         return {
-            message: 'Invalid payment'
+            message: 'Invalid payment.'
         };
     }
     const { tran_id } = result;
