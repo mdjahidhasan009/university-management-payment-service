@@ -28,7 +28,7 @@ const initPayment = (payload) => __awaiter(void 0, void 0, void 0, function* () 
             success_url: `${config_1.default.apiGatewayUrl}/api/v1/payments?status=success`,
             fail_url: `${config_1.default.apiGatewayUrl}/api/v1/payments?status=error`,
             cancel_url: `${config_1.default.apiGatewayUrl}/api/v1/payments?status=warning`,
-            ipn_url: `${config_1.default.apiGatewayUrl}/api/v1/webhook`,
+            ipn_url: `${config_1.default.apiGatewayUrl}/api/v1/payments/webhook`,
             shipping_method: 'N/A',
             product_name: 'Semester Payment',
             product_category: 'Payment',

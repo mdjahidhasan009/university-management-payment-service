@@ -14,7 +14,7 @@ const initPayment = async (payload: any) => {
       success_url: `${config.apiGatewayUrl}/api/v1/payments?status=success`,
       fail_url: `${config.apiGatewayUrl}/api/v1/payments?status=error`,
       cancel_url: `${config.apiGatewayUrl}/api/v1/payments?status=warning`,
-      ipn_url: `${config.apiGatewayUrl}/api/v1/webhook`,
+      ipn_url: `${config.apiGatewayUrl}/api/v1/payments/webhook`,
       shipping_method: 'N/A',
       product_name: 'Semester Payment',
       product_category: 'Payment',
