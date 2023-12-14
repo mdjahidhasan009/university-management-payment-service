@@ -149,9 +149,28 @@ const getByIdFromDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
     });
     return result;
 });
+const paymentSuccessResponse = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log('success payment');
+    console.log(req.query);
+    // const response: IGenericResponse = await PaymentService.post(
+    //   '/payment/success',
+    //   {
+    //     params: req.query,
+    //     headers: {
+    //       Authorization: req.headers.authorization
+    //     }
+    //   }
+    // );
+    // return response;
+    return res.status(200).json({
+        data: req.query,
+        message: 'Payment success'
+    });
+});
 exports.PaymentService = {
     initPayment,
     webhook,
     getAllFromDB,
-    getByIdFromDB
+    getByIdFromDB,
+    paymentSuccessResponse
 };

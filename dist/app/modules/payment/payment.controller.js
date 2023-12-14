@@ -38,6 +38,8 @@ const initPayment = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
     }
 });
 const webhook = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log('webhook called');
+    console.log(req.query);
     const result = yield payment_service_1.PaymentService.webhook(req.query);
     (0, response_1.default)(res, {
         success: true,
@@ -79,9 +81,24 @@ const getByIdFromDB = (req, res, next) => __awaiter(void 0, void 0, void 0, func
         next(error);
     }
 });
+const paymentSuccessResponse = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield payment_service_1.PaymentService.paymentSuccessResponse(req, res);
+        (0, response_1.default)(res, {
+            statusCode: http_status_1.default.OK,
+            success: true,
+            message: 'Payment success',
+            data: result
+        });
+    }
+    catch (error) {
+        next(error);
+    }
+});
 exports.PaymentController = {
     initPayment,
     webhook,
     getAllFromDB,
-    getByIdFromDB
+    getByIdFromDB,
+    paymentSuccessResponse
 };

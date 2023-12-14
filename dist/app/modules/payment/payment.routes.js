@@ -12,6 +12,9 @@ const router = express_1.default.Router();
 router.post('/init', 
 // auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.SUPER_ADMIN),
 payment_controller_1.PaymentController.initPayment);
+router.post('/success', 
+// auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.SUPER_ADMIN),
+payment_controller_1.PaymentController.paymentSuccessResponse);
 router.post('/webhook', 
 // auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.SUPER_ADMIN),
 payment_controller_1.PaymentController.webhook);

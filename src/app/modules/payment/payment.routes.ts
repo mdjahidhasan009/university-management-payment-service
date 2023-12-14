@@ -11,6 +11,12 @@ router.post(
   PaymentController.initPayment
 );
 router.post(
+  '/success',
+  // auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.SUPER_ADMIN),
+  PaymentController.paymentSuccessResponse
+);
+
+router.post(
   '/webhook',
   // auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.SUPER_ADMIN),
   PaymentController.webhook
