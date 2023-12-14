@@ -63,10 +63,10 @@ const initPayment = (data) => __awaiter(void 0, void 0, void 0, function* () {
         return null;
     }
 });
-const webhook = (payload, body) => __awaiter(void 0, void 0, void 0, function* () {
+const webhook = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('payment service webhook');
     console.log('payload', payload);
-    console.log('body', body);
+    // console.log('body', body);
     if (!payload || !(payload === null || payload === void 0 ? void 0 : payload.status) || (payload === null || payload === void 0 ? void 0 : payload.status) !== 'VALID') {
         console.error('1');
         console.error(payload);

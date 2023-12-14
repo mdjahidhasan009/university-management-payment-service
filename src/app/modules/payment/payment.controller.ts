@@ -29,7 +29,8 @@ const webhook = async (req: Request, res: Response, next: NextFunction) => {
   console.log('webhook called');
   console.log('req.query', req.query);
   console.log('req.body', req.body);
-  const result = await PaymentService.webhook(req.query, req.body);
+  // const result = await PaymentService.webhook(req.query, req.body);
+  const result = await PaymentService.webhook(req.body);
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,

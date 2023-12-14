@@ -42,10 +42,10 @@ const initPayment = async (data: any) => {
   }
 };
 
-const webhook = async (payload: any, body: any) => {
+const webhook = async (payload: any) => {
   console.log('payment service webhook');
   console.log('payload', payload);
-  console.log('body', body);
+  // console.log('body', body);
   if (!payload || !payload?.status || payload?.status !== 'VALID') {
     console.error('1');
     console.error(payload);

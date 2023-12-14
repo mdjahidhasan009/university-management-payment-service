@@ -41,7 +41,8 @@ const webhook = (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
     console.log('webhook called');
     console.log('req.query', req.query);
     console.log('req.body', req.body);
-    const result = yield payment_service_1.PaymentService.webhook(req.query, req.body);
+    // const result = await PaymentService.webhook(req.query, req.body);
+    const result = yield payment_service_1.PaymentService.webhook(req.body);
     (0, response_1.default)(res, {
         success: true,
         statusCode: http_status_1.default.OK,
