@@ -42,7 +42,9 @@ const initPayment = async (data: any) => {
   }
 };
 
-const webhook = async (payload: any) => {
+const webhook = async (reqBody: any) => {
+  console.log('reqBody', reqBody);
+  const payload = reqBody?.body || {};
   console.log('payment service webhook');
   console.log('payload', payload);
   // console.log('body', body);

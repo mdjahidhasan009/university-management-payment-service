@@ -63,7 +63,9 @@ const initPayment = (data) => __awaiter(void 0, void 0, void 0, function* () {
         return null;
     }
 });
-const webhook = (payload) => __awaiter(void 0, void 0, void 0, function* () {
+const webhook = (reqBody) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log('reqBody', reqBody);
+    const payload = (reqBody === null || reqBody === void 0 ? void 0 : reqBody.body) || {};
     console.log('payment service webhook');
     console.log('payload', payload);
     // console.log('body', body);
