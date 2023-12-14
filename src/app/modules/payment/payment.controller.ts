@@ -27,8 +27,9 @@ const initPayment = async (req: Request, res: Response, next: NextFunction) => {
 
 const webhook = async (req: Request, res: Response, next: NextFunction) => {
   console.log('webhook called');
-  console.log(req.query);
-  const result = await PaymentService.webhook(req.query);
+  console.log('req.query', req.query);
+  console.log('req.body', req.body);
+  const result = await PaymentService.webhook(req.query, req.body);
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
@@ -83,7 +84,7 @@ const paymentSuccessResponse = async (req: Request, res: Response, next: NextFun
   } catch (error) {
     next(error);
   }
-}
+};
 
 export const PaymentController = {
   initPayment,

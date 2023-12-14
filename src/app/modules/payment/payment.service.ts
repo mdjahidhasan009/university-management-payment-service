@@ -42,7 +42,10 @@ const initPayment = async (data: any) => {
   }
 };
 
-const webhook = async (payload: any) => {
+const webhook = async (payload: any, body: any) => {
+  console.log('payment service webhook');
+  console.log('payload', payload);
+  console.log('body', body);
   if (!payload || !payload?.status || payload?.status !== 'VALID') {
     console.error('1');
     console.error(payload);
@@ -143,6 +146,7 @@ const getByIdFromDB = async (id: string): Promise<Payment | null> => {
 const paymentSuccessResponse = async (req: any, res: any) => {
   console.log('success payment');
   console.log(req.query);
+  console.log(req.body);
   // const response: IGenericResponse = await PaymentService.post(
   //   '/payment/success',
   //   {
@@ -154,10 +158,13 @@ const paymentSuccessResponse = async (req: any, res: any) => {
   // );
   // return response;
 
-  return res.status(200).json({
-    data: req.query,
-    message: 'Payment success'
-  });
+  return {
+    data: {
+      query: req.query,
+      body: req.body
+    },
+    message: 'Payment Successful'
+  };
 };
 
 export const PaymentService = {

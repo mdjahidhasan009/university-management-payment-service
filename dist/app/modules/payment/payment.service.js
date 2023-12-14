@@ -63,7 +63,10 @@ const initPayment = (data) => __awaiter(void 0, void 0, void 0, function* () {
         return null;
     }
 });
-const webhook = (payload) => __awaiter(void 0, void 0, void 0, function* () {
+const webhook = (payload, body) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log('payment service webhook');
+    console.log('payload', payload);
+    console.log('body', body);
     if (!payload || !(payload === null || payload === void 0 ? void 0 : payload.status) || (payload === null || payload === void 0 ? void 0 : payload.status) !== 'VALID') {
         console.error('1');
         console.error(payload);
@@ -152,6 +155,7 @@ const getByIdFromDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
 const paymentSuccessResponse = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('success payment');
     console.log(req.query);
+    console.log(req.body);
     // const response: IGenericResponse = await PaymentService.post(
     //   '/payment/success',
     //   {
@@ -162,10 +166,13 @@ const paymentSuccessResponse = (req, res) => __awaiter(void 0, void 0, void 0, f
     //   }
     // );
     // return response;
-    return res.status(200).json({
-        data: req.query,
-        message: 'Payment success'
-    });
+    return {
+        data: {
+            query: req.query,
+            body: req.body
+        },
+        message: 'Payment Successful'
+    };
 });
 exports.PaymentService = {
     initPayment,
