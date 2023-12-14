@@ -65,18 +65,23 @@ const initPayment = (data) => __awaiter(void 0, void 0, void 0, function* () {
 });
 const webhook = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     if (!payload || !(payload === null || payload === void 0 ? void 0 : payload.status) || (payload === null || payload === void 0 ? void 0 : payload.status) !== 'VALID') {
+        console.error('1');
+        console.error(payload);
         return {
             message: 'Invalid payment!'
         };
     }
     const result = yield ssl_service_1.sslService.validate(payload);
     if ((result === null || result === void 0 ? void 0 : result.status) !== 'VALID') {
+        console.error('2');
+        console.error(payload);
         return {
             message: 'Invalid payment.'
         };
     }
     const { tran_id } = result;
-    yield prisma_1.default.payment.updateMany({
+    console.log('tran_id', tran_id);
+    const prismaResult = yield prisma_1.default.payment.updateMany({
         where: {
             transactionId: tran_id
         },
@@ -85,6 +90,7 @@ const webhook = (payload) => __awaiter(void 0, void 0, void 0, function* () {
             paymentGatewayData: payload
         }
     });
+    console.log('prismaResult', prismaResult);
     return {
         message: 'Payment Successful'
     };
