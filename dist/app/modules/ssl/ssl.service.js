@@ -14,9 +14,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.sslService = void 0;
 const config_1 = __importDefault(require("../../../config"));
-const axios_1 = __importDefault(require("axios"));
+// import axios from 'axios';
 const apiError_1 = __importDefault(require("../../../errors/apiError"));
 const http_status_1 = __importDefault(require("http-status"));
+const axios_1 = require("../../../helpers/axios");
 const initPayment = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = {
@@ -51,12 +52,19 @@ const initPayment = (payload) => __awaiter(void 0, void 0, void 0, function* () 
             ship_postcode: 1000,
             ship_country: 'Bangladesh'
         };
-        const response = yield (0, axios_1.default)({
-            method: 'post',
+        ////TODO: will replace with SSL Service
+        const response = yield (0, axios_1.SSLPaymentService)({
+            method: 'POST',
             url: config_1.default.ssl.sslPaymentUrl,
             data: data,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         });
+        // const response = await axios({
+        //   method: 'post',
+        //   url: config.ssl.sslPaymentUrl,
+        //   data: data,
+        //   headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        // });
         return response === null || response === void 0 ? void 0 : response.data;
     }
     catch (e) {
@@ -65,10 +73,14 @@ const initPayment = (payload) => __awaiter(void 0, void 0, void 0, function* () 
 });
 const validate = (data) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const response = yield (0, axios_1.default)({
+        const response = yield (0, axios_1.SSLValidationService)({
             method: 'GET',
             url: `${config_1.default.ssl.sslValidationUrl}?val_id=${data.val_id}&store_id=${config_1.default.ssl.storeId}&store_passwd=${config_1.default.ssl.storePass}&format=json`
         });
+        // const response = await axios({
+        //   method: 'GET',
+        //   url: `${config.ssl.sslValidationUrl}?val_id=${data.val_id}&store_id=${config.ssl.storeId}&store_passwd=${config.ssl.storePass}&format=json`
+        // });
         console.log(response === null || response === void 0 ? void 0 : response.data);
         return response === null || response === void 0 ? void 0 : response.data;
     }

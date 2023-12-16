@@ -1,7 +1,8 @@
 import config from '../../../config';
-import axios from 'axios';
+// import axios from 'axios';
 import ApiError from '../../../errors/apiError';
 import httpStatus from 'http-status';
+import { SSLPaymentService, SSLValidationService } from "../../../helpers/axios";
 
 const initPayment = async (payload: any) => {
   try {
@@ -38,12 +39,19 @@ const initPayment = async (payload: any) => {
       ship_country: 'Bangladesh'
     };
 
-    const response = await axios({
-      method: 'post',
+    ////TODO: will replace with SSL Service
+    const response = await SSLPaymentService({
+      method: 'POST',
       url: config.ssl.sslPaymentUrl,
       data: data,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     });
+    // const response = await axios({
+    //   method: 'post',
+    //   url: config.ssl.sslPaymentUrl,
+    //   data: data,
+    //   headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    // });
 
     return response?.data;
   } catch (e) {
@@ -53,10 +61,15 @@ const initPayment = async (payload: any) => {
 
 const validate = async (data: any) => {
   try {
-    const response = await axios({
+    const response = await SSLValidationService({
       method: 'GET',
       url: `${config.ssl.sslValidationUrl}?val_id=${data.val_id}&store_id=${config.ssl.storeId}&store_passwd=${config.ssl.storePass}&format=json`
     });
+
+    // const response = await axios({
+    //   method: 'GET',
+    //   url: `${config.ssl.sslValidationUrl}?val_id=${data.val_id}&store_id=${config.ssl.storeId}&store_passwd=${config.ssl.storePass}&format=json`
+    // });
     console.log(response?.data);
     return response?.data;
   } catch (err) {

@@ -43,28 +43,21 @@ const initPayment = async (data: any) => {
 };
 
 const webhook = async (reqBody: any) => {
-  console.log('reqBody', reqBody);
   const payload = reqBody?.body || {};
-  console.log('payment service webhook');
-  console.log('payload', payload);
-  // console.log('body', body);
   if (!payload || !payload?.status || payload?.status !== 'VALID') {
-    console.error('1');
-    console.error(payload);
     return {
       message: 'Invalid payment!'
     };
   }
+
   const result = await sslService.validate(payload);
   if (result?.status !== 'VALID') {
-    console.error('2');
-    console.error(payload);
     return {
       message: 'Invalid payment.'
     };
   }
+
   const { tran_id } = result;
-  console.log('tran_id', tran_id);
   const prismaResult = await prisma.payment.updateMany({
     where: {
       transactionId: tran_id
@@ -74,7 +67,6 @@ const webhook = async (reqBody: any) => {
       paymentGatewayData: payload
     }
   });
-  console.log('prismaResult', prismaResult);
 
   return {
     message: 'Payment Successful'

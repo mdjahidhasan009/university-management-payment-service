@@ -22,7 +22,7 @@ const redisClient = (0, redis_1.createClient)({
 // redisClient.on('error', (err) => logger.error('RedisError', err));
 redisClient.on('error', (err) => console.error('RedisError', err));
 // redisClient.on('connect', (err) => logger.info('Redis connected'));
-redisClient.on('connect', (err) => console.info('Redis connected'));
+redisClient.on('connect', (err) => console.info('Redis connected', err));
 const connect = () => __awaiter(void 0, void 0, void 0, function* () {
     yield redisClient.connect();
 });
