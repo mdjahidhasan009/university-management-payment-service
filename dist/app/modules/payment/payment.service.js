@@ -68,13 +68,16 @@ const initPayment = (data) => __awaiter(void 0, void 0, void 0, function* () {
 });
 const webhook = (reqBody) => __awaiter(void 0, void 0, void 0, function* () {
     const payload = (reqBody === null || reqBody === void 0 ? void 0 : reqBody.body) || {};
+    console.log('inside webhook', payload);
     if (!payload || !(payload === null || payload === void 0 ? void 0 : payload.status) || (payload === null || payload === void 0 ? void 0 : payload.status) !== 'VALID') {
+        console.log('error 1', payload);
         return {
             message: 'Invalid payment!'
         };
     }
     const result = yield ssl_service_1.sslService.validate(payload);
     if ((result === null || result === void 0 ? void 0 : result.status) !== 'VALID') {
+        console.log('error 2', result);
         return {
             message: 'Invalid payment.'
         };
@@ -89,6 +92,7 @@ const webhook = (reqBody) => __awaiter(void 0, void 0, void 0, function* () {
             paymentGatewayData: payload
         }
     });
+    console.log('prismaResult', prismaResult);
     return {
         message: 'Payment Successful'
     };

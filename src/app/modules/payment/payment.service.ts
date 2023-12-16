@@ -47,7 +47,10 @@ const initPayment = async (data: any) => {
 
 const webhook = async (reqBody: any) => {
   const payload = reqBody?.body || {};
+  console.log('inside webhook', payload);
+
   if (!payload || !payload?.status || payload?.status !== 'VALID') {
+    console.log('error 1', payload);
     return {
       message: 'Invalid payment!'
     };
@@ -55,6 +58,7 @@ const webhook = async (reqBody: any) => {
 
   const result = await sslService.validate(payload);
   if (result?.status !== 'VALID') {
+    console.log('error 2', result);
     return {
       message: 'Invalid payment.'
     };
@@ -70,6 +74,7 @@ const webhook = async (reqBody: any) => {
       paymentGatewayData: payload
     }
   });
+  console.log('prismaResult', prismaResult);
 
   return {
     message: 'Payment Successful'
