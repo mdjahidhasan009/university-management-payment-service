@@ -81,7 +81,8 @@ const validate = (data) => __awaiter(void 0, void 0, void 0, function* () {
         //   url: `${config.ssl.sslValidationUrl}?val_id=${data.val_id}&store_id=${config.ssl.storeId}&store_passwd=${config.ssl.storePass}&format=json`
         // });
         console.log(response);
-        return response === null || response === void 0 ? void 0 : response.data;
+        return response;
+        // return response?.data;
     }
     catch (err) {
         throw new apiError_1.default(http_status_1.default.BAD_REQUEST, 'Payment error');

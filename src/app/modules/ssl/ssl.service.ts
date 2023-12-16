@@ -63,7 +63,7 @@ const initPayment = async (payload: any): Promise<any> => {
   }
 };
 
-const validate = async (data: any) => {
+const validate = async (data: any): Promise<any> => {
   try {
     const response = await SSLValidationService.get(
       `${config.ssl.sslValidationUrl}?val_id=${data.val_id}&store_id=${config.ssl.storeId}&store_passwd=${config.ssl.storePass}&format=json`
@@ -74,7 +74,8 @@ const validate = async (data: any) => {
     //   url: `${config.ssl.sslValidationUrl}?val_id=${data.val_id}&store_id=${config.ssl.storeId}&store_passwd=${config.ssl.storePass}&format=json`
     // });
     console.log(response);
-    return response?.data;
+    return response;
+    // return response?.data;
   } catch (err) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Payment error');
   }
