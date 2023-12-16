@@ -28,6 +28,7 @@ const ssl_service_1 = require("../ssl/ssl.service");
 const prisma_1 = __importDefault(require("../../../shared/prisma"));
 const paginationHelper_1 = require("../../../helpers/paginationHelper");
 const payment_constants_1 = require("./payment.constants");
+const axios_1 = require("../../../helpers/axios");
 const initPayment = (data) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     try {
@@ -93,6 +94,10 @@ const webhook = (reqBody) => __awaiter(void 0, void 0, void 0, function* () {
         }
     });
     console.log('prismaResult', prismaResult);
+    const completePayment = yield axios_1.ApiGatewayService.post('/student-semester-payments/complete-payment', {
+        transactionId: tran_id
+    });
+    console.log('completePayment', completePayment);
     return {
         message: 'Payment Successful'
     };

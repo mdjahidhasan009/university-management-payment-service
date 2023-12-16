@@ -4,6 +4,7 @@ import { Payment, Prisma } from '@prisma/client';
 import { IGenericResponse } from '../../../interfaces/common';
 import { PaginationHelper } from '../../../helpers/paginationHelper';
 import { paymentSearchableFields } from './payment.constants';
+import { ApiGatewayService } from "../../../helpers/axios";
 
 const initPayment = async (data: any) => {
   try {
@@ -75,6 +76,15 @@ const webhook = async (reqBody: any) => {
     }
   });
   console.log('prismaResult', prismaResult);
+
+  const completePayment = await ApiGatewayService.post(
+    '/student-semester-payments/complete-payment',
+    {
+      transactionId: tran_id
+    }
+  );
+
+  console.log('completePayment', completePayment);
 
   return {
     message: 'Payment Successful'
