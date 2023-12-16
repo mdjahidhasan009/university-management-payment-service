@@ -29,6 +29,7 @@ const prisma_1 = __importDefault(require("../../../shared/prisma"));
 const paginationHelper_1 = require("../../../helpers/paginationHelper");
 const payment_constants_1 = require("./payment.constants");
 const initPayment = (data) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     try {
         // "amount": 100,
         //   "transactionId": "", // use unique tran_id for each api call
@@ -56,7 +57,9 @@ const initPayment = (data) => __awaiter(void 0, void 0, void 0, function* () {
                 studentId: data === null || data === void 0 ? void 0 : data.studentId
             }
         });
-        return paymentSession.redirectGatewayURL;
+        // console.log(paymentSession?.redirectGatewayURL);
+        // const redirectURL = paymentSession?.redirectGatewayURL;
+        return (_a = paymentSession === null || paymentSession === void 0 ? void 0 : paymentSession.data) === null || _a === void 0 ? void 0 : _a.redirectGatewayURL;
     }
     catch (e) {
         console.log(e);

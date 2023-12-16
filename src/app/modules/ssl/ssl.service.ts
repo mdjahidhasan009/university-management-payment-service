@@ -2,11 +2,11 @@ import config from '../../../config';
 // import axios from 'axios';
 import ApiError from '../../../errors/apiError';
 import httpStatus from 'http-status';
-import { SSLPaymentService, SSLValidationService } from "../../../helpers/axios";
+import { SSLPaymentService, SSLValidationService } from '../../../helpers/axios';
 
-const initPayment = async (payload: any) => {
+const initPayment = async (payload: any): Promise<any> => {
   try {
-    const data = {
+    const data: { [key: string]: string | number } = {
       store_id: config.ssl.storeId,
       store_passwd: config.ssl.storePass,
       total_amount: payload.total_amount,
@@ -39,21 +39,25 @@ const initPayment = async (payload: any) => {
       ship_country: 'Bangladesh'
     };
 
-    ////TODO: will replace with SSL Service
-    const response = await SSLPaymentService({
-      method: 'POST',
-      url: config.ssl.sslPaymentUrl,
-      data: data,
+    const params = new URLSearchParams();
+    Object.keys(data).forEach((key: string) => {
+      params.append(key, data[key] as string);
+    });
+
+    const response = await SSLPaymentService.post(config.ssl.sslPaymentUrl, params.toString(), {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     });
+
+    ////TODO: will replace with SSL Service
     // const response = await axios({
     //   method: 'post',
     //   url: config.ssl.sslPaymentUrl,
     //   data: data,
     //   headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     // });
+    // console.log(response);
 
-    return response?.data;
+    return { data: response };
   } catch (e) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Payment Error');
   }
@@ -61,16 +65,15 @@ const initPayment = async (payload: any) => {
 
 const validate = async (data: any) => {
   try {
-    const response = await SSLValidationService({
-      method: 'GET',
-      url: `${config.ssl.sslValidationUrl}?val_id=${data.val_id}&store_id=${config.ssl.storeId}&store_passwd=${config.ssl.storePass}&format=json`
-    });
+    const response = await SSLValidationService.get(
+      `${config.ssl.sslValidationUrl}?val_id=${data.val_id}&store_id=${config.ssl.storeId}&store_passwd=${config.ssl.storePass}&format=json`
+    );
 
     // const response = await axios({
     //   method: 'GET',
     //   url: `${config.ssl.sslValidationUrl}?val_id=${data.val_id}&store_id=${config.ssl.storeId}&store_passwd=${config.ssl.storePass}&format=json`
     // });
-    console.log(response?.data);
+    console.log(response);
     return response?.data;
   } catch (err) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Payment error');

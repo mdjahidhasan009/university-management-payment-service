@@ -52,20 +52,22 @@ const initPayment = (payload) => __awaiter(void 0, void 0, void 0, function* () 
             ship_postcode: 1000,
             ship_country: 'Bangladesh'
         };
-        ////TODO: will replace with SSL Service
-        const response = yield (0, axios_1.SSLPaymentService)({
-            method: 'POST',
-            url: config_1.default.ssl.sslPaymentUrl,
-            data: data,
+        const params = new URLSearchParams();
+        Object.keys(data).forEach((key) => {
+            params.append(key, data[key]);
+        });
+        const response = yield axios_1.SSLPaymentService.post(config_1.default.ssl.sslPaymentUrl, params.toString(), {
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         });
+        ////TODO: will replace with SSL Service
         // const response = await axios({
         //   method: 'post',
         //   url: config.ssl.sslPaymentUrl,
         //   data: data,
         //   headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         // });
-        return response === null || response === void 0 ? void 0 : response.data;
+        // console.log(response);
+        return { data: response };
     }
     catch (e) {
         throw new apiError_1.default(http_status_1.default.BAD_REQUEST, 'Payment Error');
@@ -73,15 +75,12 @@ const initPayment = (payload) => __awaiter(void 0, void 0, void 0, function* () 
 });
 const validate = (data) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const response = yield (0, axios_1.SSLValidationService)({
-            method: 'GET',
-            url: `${config_1.default.ssl.sslValidationUrl}?val_id=${data.val_id}&store_id=${config_1.default.ssl.storeId}&store_passwd=${config_1.default.ssl.storePass}&format=json`
-        });
+        const response = yield axios_1.SSLValidationService.get(`${config_1.default.ssl.sslValidationUrl}?val_id=${data.val_id}&store_id=${config_1.default.ssl.storeId}&store_passwd=${config_1.default.ssl.storePass}&format=json`);
         // const response = await axios({
         //   method: 'GET',
         //   url: `${config.ssl.sslValidationUrl}?val_id=${data.val_id}&store_id=${config.ssl.storeId}&store_passwd=${config.ssl.storePass}&format=json`
         // });
-        console.log(response === null || response === void 0 ? void 0 : response.data);
+        console.log(response);
         return response === null || response === void 0 ? void 0 : response.data;
     }
     catch (err) {

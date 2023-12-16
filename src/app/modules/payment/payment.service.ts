@@ -35,7 +35,10 @@ const initPayment = async (data: any) => {
       }
     });
 
-    return paymentSession.redirectGatewayURL;
+    // console.log(paymentSession?.redirectGatewayURL);
+    // const redirectURL = paymentSession?.redirectGatewayURL;
+
+    return paymentSession?.data?.redirectGatewayURL;
   } catch (e) {
     console.log(e);
     return null;
