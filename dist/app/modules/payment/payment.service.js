@@ -96,6 +96,8 @@ const webhook = (reqBody) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('prismaResult', prismaResult);
     const completePayment = yield axios_1.ApiGatewayService.post('/student-semester-payments/complete-payment', {
         transactionId: tran_id
+    }, {
+        headers: reqBody === null || reqBody === void 0 ? void 0 : reqBody.headers
     });
     console.log('completePayment', completePayment);
     return {

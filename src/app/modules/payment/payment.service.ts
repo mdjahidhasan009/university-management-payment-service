@@ -81,6 +81,9 @@ const webhook = async (reqBody: any) => {
     '/student-semester-payments/complete-payment',
     {
       transactionId: tran_id
+    },
+    {
+      headers: reqBody?.headers
     }
   );
 
