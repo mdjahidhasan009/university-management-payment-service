@@ -96,6 +96,7 @@ const webhook = (reqBody) => __awaiter(void 0, void 0, void 0, function* () {
     });
     console.log('prismaResult', prismaResult);
     const apiKeyForEcommercePayment = config_1.default.apiKeyForEcommercePayment;
+    console.log('apiKeyForEcommercePayment', apiKeyForEcommercePayment);
     const completePayment = yield axios_1.ApiGatewayService.post('/student-semester-payments/complete-payment', {
         transactionId: tran_id
     }, {

@@ -79,6 +79,7 @@ const webhook = async (reqBody: any) => {
   console.log('prismaResult', prismaResult);
 
   const apiKeyForEcommercePayment = config.apiKeyForEcommercePayment;
+  console.log('apiKeyForEcommercePayment', apiKeyForEcommercePayment);
   const completePayment = await ApiGatewayService.post(
     '/student-semester-payments/complete-payment',
     {
