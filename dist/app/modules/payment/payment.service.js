@@ -29,6 +29,7 @@ const prisma_1 = __importDefault(require("../../../shared/prisma"));
 const paginationHelper_1 = require("../../../helpers/paginationHelper");
 const payment_constants_1 = require("./payment.constants");
 const axios_1 = require("../../../helpers/axios");
+const config_1 = __importDefault(require("../../../config"));
 const initPayment = (data) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     try {
@@ -94,10 +95,11 @@ const webhook = (reqBody) => __awaiter(void 0, void 0, void 0, function* () {
         }
     });
     console.log('prismaResult', prismaResult);
+    const apiKeyForEcommercePayment = config_1.default.apiKeyForEcommercePayment;
     const completePayment = yield axios_1.ApiGatewayService.post('/student-semester-payments/complete-payment', {
         transactionId: tran_id
     }, {
-        headers: reqBody === null || reqBody === void 0 ? void 0 : reqBody.headers
+        headers: Object.assign(Object.assign({}, reqBody === null || reqBody === void 0 ? void 0 : reqBody.headers), { 'X-API-KEY': apiKeyForEcommercePayment })
     });
     console.log('completePayment', completePayment);
     return {

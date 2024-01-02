@@ -4,7 +4,8 @@ import { Payment, Prisma } from '@prisma/client';
 import { IGenericResponse } from '../../../interfaces/common';
 import { PaginationHelper } from '../../../helpers/paginationHelper';
 import { paymentSearchableFields } from './payment.constants';
-import { ApiGatewayService } from "../../../helpers/axios";
+import { ApiGatewayService } from '../../../helpers/axios';
+import config from '../../../config';
 
 const initPayment = async (data: any) => {
   try {
@@ -77,13 +78,17 @@ const webhook = async (reqBody: any) => {
   });
   console.log('prismaResult', prismaResult);
 
+  const apiKeyForEcommercePayment = config.apiKeyForEcommercePayment;
   const completePayment = await ApiGatewayService.post(
     '/student-semester-payments/complete-payment',
     {
       transactionId: tran_id
     },
     {
-      headers: reqBody?.headers
+      headers: {
+        ...reqBody?.headers,
+        'X-API-KEY': apiKeyForEcommercePayment
+      }
     }
   );
 
