@@ -98,7 +98,8 @@ const webhook = (reqBody) => __awaiter(void 0, void 0, void 0, function* () {
     const apiKeyForEcommercePayment = config_1.default.apiKeyForEcommercePayment;
     console.log('apiKeyForEcommercePayment', apiKeyForEcommercePayment);
     const completePayment = yield axios_1.ApiGatewayService.post('/student-semester-payments/complete-payment', {
-        transactionId: tran_id
+        transactionId: tran_id,
+        apiKey: apiKeyForEcommercePayment ////TODO: have to do it with only using headers
     }, {
         headers: {
             // ...reqBody?.headers,
