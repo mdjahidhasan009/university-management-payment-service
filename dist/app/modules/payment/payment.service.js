@@ -99,7 +99,10 @@ const webhook = (reqBody) => __awaiter(void 0, void 0, void 0, function* () {
     const completePayment = yield axios_1.ApiGatewayService.post('/student-semester-payments/complete-payment', {
         transactionId: tran_id
     }, {
-        headers: Object.assign(Object.assign({}, reqBody === null || reqBody === void 0 ? void 0 : reqBody.headers), { 'X-API-KEY': apiKeyForEcommercePayment })
+        headers: {
+            // ...reqBody?.headers,
+            'X-API-KEY': apiKeyForEcommercePayment
+        }
     });
     console.log('completePayment', completePayment);
     return {

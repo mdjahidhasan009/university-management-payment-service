@@ -86,7 +86,7 @@ const webhook = async (reqBody: any) => {
     },
     {
       headers: {
-        ...reqBody?.headers,
+        // ...reqBody?.headers,
         'X-API-KEY': apiKeyForEcommercePayment
       }
     }
